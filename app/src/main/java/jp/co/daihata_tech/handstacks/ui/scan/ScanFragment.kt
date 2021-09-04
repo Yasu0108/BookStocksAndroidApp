@@ -5,18 +5,21 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import jp.co.daihata_tech.handstacks.BuildConfig
 import jp.co.daihata_tech.handstacks.R
 import jp.co.daihata_tech.handstacks.databinding.FragmentScanBinding
 
 @AndroidEntryPoint
 class ScanFragment : Fragment() {
 
-    private val scanViewModel: ScanViewModel by viewModels()
+    private val scanViewModel: ScanViewModel by activityViewModels()
     private lateinit var binding: FragmentScanBinding
 
     override fun onCreateView(
@@ -37,6 +40,10 @@ class ScanFragment : Fragment() {
             editText.apply {
                 inputType = InputType.TYPE_CLASS_NUMBER
                 isSingleLine = true
+
+                if (BuildConfig.DEBUG) {
+                    setText("9784873116303", TextView.BufferType.EDITABLE)
+                }
             }
 
             MaterialAlertDialogBuilder(requireContext()).apply {
@@ -52,5 +59,16 @@ class ScanFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        scanViewModel.searchBookResult.observe(viewLifecycleOwner) {
+            if (it != null) {
+                findNavController().navigate(R.id.action_navigation_scan_to_bookRegisterFragment)
+
+            }
+        }
     }
 }

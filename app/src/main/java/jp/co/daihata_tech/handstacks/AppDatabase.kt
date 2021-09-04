@@ -1,10 +1,21 @@
 package jp.co.daihata_tech.handstacks
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import jp.co.daihata_tech.handstacks.dao.BookDao
+import jp.co.daihata_tech.handstacks.dto.BookDto
 
+@Database(
+    entities = [
+        BookDto::class
+    ],
+    version = AppDatabase.VERSION,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
+    abstract fun bookDao(): BookDao
 
     companion object {
         @Volatile

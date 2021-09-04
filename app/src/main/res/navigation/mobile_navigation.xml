@@ -15,11 +15,20 @@
         android:id="@+id/navigation_scan"
         android:name="jp.co.daihata_tech.handstacks.ui.scan.ScanFragment"
         android:label="@string/title_scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_navigation_scan_to_bookRegisterFragment"
+            app:destination="@id/bookRegisterFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_bookstocks"
         android:name="jp.co.daihata_tech.handstacks.ui.bookstocks.BookStocksFragment"
         android:label="@string/title_book_stocks"
         tools:layout="@layout/fragment_bookstocks" />
+
+    <fragment
+        android:id="@+id/bookRegisterFragment"
+        android:name="jp.co.daihata_tech.handstacks.ui.bookregister.BookRegisterFragment"
+        android:label="BookRegisterFragment" />
 </navigation>

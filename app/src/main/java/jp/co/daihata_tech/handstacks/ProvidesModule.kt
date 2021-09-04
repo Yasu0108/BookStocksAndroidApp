@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import jp.co.daihata_tech.handstacks.api.RakutenApiService
+import jp.co.daihata_tech.handstacks.dao.BookDao
 import jp.co.daihata_tech.handstacks.repository.BookRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,6 +24,12 @@ object ProvidesModule {
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getDataBase(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideBookDao(appDatabase: AppDatabase): BookDao {
+        return appDatabase.bookDao()
     }
 
     @Provides
@@ -54,7 +61,10 @@ object ProvidesModule {
     }
 
     @Provides
-    fun provideBookRepository(rakutenApiService: RakutenApiService): BookRepository {
-        return BookRepository(rakutenApiService)
+    fun provideBookRepository(
+        rakutenApiService: RakutenApiService,
+        bookDao: BookDao
+    ): BookRepository {
+        return BookRepository(rakutenApiService, bookDao)
     }
 }

@@ -17,6 +17,7 @@ data class BookDto(
     @ColumnInfo(name = "seriesNameKana") var seriesNameKana: String,
     @ColumnInfo(name = "contents") var contents: String,
     @ColumnInfo(name = "contentsKana") var contentsKana: String,
+    @ColumnInfo(name = "author") var author: String,
     @ColumnInfo(name = "authorKana") var authorKana: String,
     @ColumnInfo(name = "publisherName") var publisherName: String,
     @ColumnInfo(name = "size") var size: String,
