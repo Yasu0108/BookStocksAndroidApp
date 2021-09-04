@@ -1,4 +1,4 @@
-package jp.co.daihata_tech.handstacks.ui.notifications
+package jp.co.daihata_tech.handstacks.ui.bookstocks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -6,7 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import jp.co.daihata_tech.handstacks.api.RBooksApiService
+import jp.co.daihata_tech.handstacks.api.RakutenApiService
+import jp.co.daihata_tech.handstacks.repository.BookRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -43,12 +44,17 @@ object ProvidesModule {
     }
 
     @Provides
-    fun provideRBooksApiService(okHttpClient: OkHttpClient): RBooksApiService {
+    fun provideRBooksApiService(okHttpClient: OkHttpClient): RakutenApiService {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://geoapi.heartrails.com/")
+            .baseUrl("https://app.rakuten.co.jp/services/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(RBooksApiService::class.java)
+            .create(RakutenApiService::class.java)
+    }
+
+    @Provides
+    fun provideBookRepository(rakutenApiService: RakutenApiService): BookRepository {
+        return BookRepository(rakutenApiService)
     }
 }
