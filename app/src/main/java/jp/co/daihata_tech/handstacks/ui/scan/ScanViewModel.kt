@@ -1,7 +1,10 @@
 package jp.co.daihata_tech.handstacks.ui.scan
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import jp.co.daihata_tech.handstacks.repository.BookRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -14,18 +17,16 @@ class ScanViewModel @ViewModelInject constructor(
         value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
-    val isbnText = MutableLiveData("")
 
     private val _toastString = MutableLiveData("")
-    val toastString  = _toastString
+    val toastString = _toastString
 
-    fun getBook() {
+    fun getBook(isbn: String) {
         Timber.d("getBook")
         viewModelScope.launch {
-            isbnText.value?.let {
-                val result = bookRepository.getBookByISBN(it)
-                Timber.d("getBook Result:${result}")
-            }
+            val result = bookRepository.getBookByISBN(isbn)
+            Timber.d("getBook Result:${result}")
+
         }
     }
 }

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/edittext_input_isbn.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/fragment_bookstocks.xml" value="0.19157608695652173" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.13858695652173914" />
       </map>
     </option>
   </component>
