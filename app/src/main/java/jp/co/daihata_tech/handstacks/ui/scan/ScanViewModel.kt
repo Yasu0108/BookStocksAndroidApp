@@ -26,7 +26,6 @@ class ScanViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             val result = bookRepository.getBookByISBN(isbn)
             Timber.d("getBook Result:${result}")
-
         }
     }
 }
