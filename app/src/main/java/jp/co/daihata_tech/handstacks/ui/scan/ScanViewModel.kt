@@ -1,16 +1,18 @@
 package jp.co.daihata_tech.handstacks.ui.scan
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import jp.co.daihata_tech.handstacks.dto.BookDto
 import jp.co.daihata_tech.handstacks.repository.BookRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class ScanViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ScanViewModel @Inject constructor(
     private val bookRepository: BookRepository
 ) : ViewModel() {
 

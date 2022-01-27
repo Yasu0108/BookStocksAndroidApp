@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import jp.co.daihata_tech.handstacks.R
 import jp.co.daihata_tech.handstacks.databinding.FragmentBookRegisterBinding
 import jp.co.daihata_tech.handstacks.ui.scan.ScanViewModel
 
@@ -34,7 +35,7 @@ class BookRegisterFragment : Fragment() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     viewModel.clearSearchBookResult()
-                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.action_bookRegisterFragment_to_navigation_scan)
                 }
             })
 

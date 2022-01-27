@@ -33,6 +33,10 @@ class ScanFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
+        binding.btnSetUpCam.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_scan_to_cameraFragment)
+        }
+
         binding.btnInputIsbn.setOnClickListener { v ->
             // ISBNコード入力ダイアログ表示
             val isbnEditText = inflater.inflate(R.layout.edittext_input_isbn, null)

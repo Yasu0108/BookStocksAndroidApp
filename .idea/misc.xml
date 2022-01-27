@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/book_info_fragment.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/camera_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/edittext_input_isbn.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/fragment_book_register.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/fragment_bookstocks.xml" value="0.19157608695652173" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.13858695652173914" />
+        <entry key="app/src/main/res/layout/list_item_book.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25384615384615383" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

@@ -4,8 +4,8 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import jp.co.daihata_tech.handstacks.api.RakutenApiService
 import jp.co.daihata_tech.handstacks.dao.BookDao
 import jp.co.daihata_tech.handstacks.repository.BookRepository
@@ -17,22 +17,23 @@ import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object ProvidesModule {
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getDataBase(context)
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideBookDao(appDatabase: AppDatabase): BookDao {
         return appDatabase.bookDao()
     }
 
     @Provides
+    @Singleton
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor {
             Timber.tag("OkHttp").d(it)
@@ -42,6 +43,7 @@ object ProvidesModule {
     }
 
     @Provides
+    @Singleton
     fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
@@ -51,6 +53,7 @@ object ProvidesModule {
     }
 
     @Provides
+    @Singleton
     fun provideRBooksApiService(okHttpClient: OkHttpClient): RakutenApiService {
         return Retrofit.Builder()
             .client(okHttpClient)
@@ -61,6 +64,7 @@ object ProvidesModule {
     }
 
     @Provides
+    @Singleton
     fun provideBookRepository(
         rakutenApiService: RakutenApiService,
         bookDao: BookDao

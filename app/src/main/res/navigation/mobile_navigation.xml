@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_scan_to_bookRegisterFragment"
             app:destination="@id/bookRegisterFragment" />
+        <action
+            android:id="@+id/action_navigation_scan_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
 
     <fragment
@@ -30,5 +33,19 @@
     <fragment
         android:id="@+id/bookRegisterFragment"
         android:name="jp.co.daihata_tech.handstacks.ui.bookregister.BookRegisterFragment"
-        android:label="BookRegisterFragment" />
+        android:label="BookRegisterFragment" >
+        <action
+            android:id="@+id/action_bookRegisterFragment_to_navigation_scan"
+            app:destination="@id/navigation_scan"
+            app:popUpTo="@id/navigation_scan"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="jp.co.daihata_tech.handstacks.ui.camera.CameraFragment"
+        android:label="CameraFragment" >
+        <action
+            android:id="@+id/action_cameraFragment_self"
+            app:destination="@id/cameraFragment" />
+    </fragment>
 </navigation>
