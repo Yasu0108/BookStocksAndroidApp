@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="jp.co.daihata_tech.handstacks.ui.scan.ScanViewModel" />
+            type="jp.co.daihata_tech.handstacks.ui.bookregister.BookRegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +30,7 @@
             android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.searchBookResult.title}"
+            android:text="@{viewModel.bookInfo.title}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_book_cover" />
 
@@ -38,7 +38,7 @@
             android:id="@+id/text_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.searchBookResult.author}"
+            android:text="@{viewModel.bookInfo.author}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_title" />
 

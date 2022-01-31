@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.co.daihata_tech.handstacks.BuildConfig
 import jp.co.daihata_tech.handstacks.R
 import jp.co.daihata_tech.handstacks.databinding.FragmentScanBinding
+import jp.co.daihata_tech.handstacks.ui.camera.CameraFragmentDirections
 
 @AndroidEntryPoint
 class ScanFragment : Fragment() {
@@ -70,7 +71,8 @@ class ScanFragment : Fragment() {
 
         scanViewModel.searchBookResult.observe(viewLifecycleOwner) {
             if (it != null) {
-                findNavController().navigate(R.id.action_navigation_scan_to_bookRegisterFragment)
+                val action = ScanFragmentDirections.actionNavigationScanToBookRegisterFragment(it)
+                findNavController().navigate(action)
 
             }
         }

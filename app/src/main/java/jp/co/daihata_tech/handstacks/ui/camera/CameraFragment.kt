@@ -17,6 +17,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -25,6 +26,7 @@ import com.google.mlkit.vision.common.InputImage
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.daihata_tech.handstacks.databinding.CameraFragmentBinding
 import jp.co.daihata_tech.handstacks.permissions.CameraPermission
+import jp.co.daihata_tech.handstacks.ui.bookregister.BookRegisterFragmentDirections
 import timber.log.Timber
 import java.nio.ByteBuffer
 import java.util.concurrent.ExecutorService
@@ -63,6 +65,14 @@ class CameraFragment : Fragment() {
         viewModel.isCompleteGetBookInfo.observe(viewLifecycleOwner) {
             // TODO : ダイアログ出す？
             // 今の所とりあえず本登録画面
+        }
+        viewModel.bookInfo.observe(viewLifecycleOwner) { book ->
+            if(book == null)return@observe
+
+            // TODO:本情報取得出来たら画像で遷移確認ダイアログ出す？
+            Toast.makeText(requireContext(), "Title:${book.title}", Toast.LENGTH_SHORT).show()
+            val action = CameraFragmentDirections.actionCameraFragmentToBookRegisterFragment(book)
+            findNavController().navigate(action)
         }
     }
 
@@ -111,19 +121,15 @@ class CameraFragment : Fragment() {
                     it.setAnalyzer(
                         workerExecutor,
                         ImageAnalyser(barcodeScanning) { barcodes ->
-                            barcodes.forEach { barcode ->
-                                // EAN-13
-                                if (barcode.format == Barcode.FORMAT_EAN_13) {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        barcode.rawValue,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                            if (barcodes.isNullOrEmpty()) return@ImageAnalyser
 
-                                    // 解析とめる必要ある？
-                                    // APIで探す
-                                    // 解析できたら写す
-                                }
+                            // EAN-13
+                            if (barcodes[0].format == Barcode.FORMAT_EAN_13) {
+
+                                // 解析とめる必要ある？
+                                viewModel.getBookInfo(barcodes)
+                                // APIで探す
+                                // 解析できたら写す
                             }
                         })
                 }

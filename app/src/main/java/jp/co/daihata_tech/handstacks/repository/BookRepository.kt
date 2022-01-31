@@ -11,13 +11,17 @@ class BookRepository @Inject constructor(
     private val bookDao: BookDao
 ) {
 
-    suspend fun getBookByISBN(isbn: String): RakutenApiService.Item {
+    suspend fun fetchBookByISBN(isbn: String): Result<RakutenApiService.Item> {
         val result = rakutenApiService.getBook("json", isbn, "1065192769086500181")
         Timber.d("getBookByISBN Result:$result")
-        return result.items.first()
+        return if (result.items.isEmpty()) {
+            Result.failure(Throwable("本が取得出来ませんでした"))
+        } else {
+            Result.success(result.items.first())
+        }
     }
 
-    suspend fun insertBook(bookDto: BookDto) {
-        bookDao.insert(bookDto)
+    suspend fun insertBook(bookDto: BookDto): Int {
+        return bookDao.insert(bookDto)
     }
 }

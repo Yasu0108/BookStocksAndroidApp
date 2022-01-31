@@ -12,7 +12,7 @@ interface BookDao {
     fun getAll(): List<BookDto>
 
     @Insert
-    fun insert(vararg books: BookDto)
+    fun insert(vararg books: BookDto):Int
 
     @Update
     fun update(bookDto: BookDto)

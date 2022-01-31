@@ -39,6 +39,9 @@
             app:destination="@id/navigation_scan"
             app:popUpTo="@id/navigation_scan"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="bookDto"
+            app:argType="jp.co.daihata_tech.handstacks.dto.BookDto" />
     </fragment>
     <fragment
         android:id="@+id/cameraFragment"
@@ -47,5 +50,8 @@
         <action
             android:id="@+id/action_cameraFragment_self"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_bookRegisterFragment"
+            app:destination="@id/bookRegisterFragment" />
     </fragment>
 </navigation>

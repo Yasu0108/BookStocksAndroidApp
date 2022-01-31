@@ -33,19 +33,14 @@ class ScanViewModel @Inject constructor(
     fun getBook(isbn: String) {
         Timber.d("getBook")
         viewModelScope.launch {
-            val result = bookRepository.getBookByISBN(isbn)
-            _searchBookResult.postValue(result.item)
-            Timber.d("getBook Result:${result}")
+            bookRepository.fetchBookByISBN(isbn)
+                .onSuccess {
+                    _searchBookResult.postValue(it.item!!)
+                    Timber.d("getBook Result:${it.item}")
+                }
+                .onFailure {
+                    Timber.d("getBook 失敗しました")
+                }
         }
-    }
-
-    fun registerBook() {
-        viewModelScope.launch {
-            searchBookResult
-        }
-    }
-
-    fun clearSearchBookResult() {
-        _searchBookResult.postValue(null)
     }
 }
